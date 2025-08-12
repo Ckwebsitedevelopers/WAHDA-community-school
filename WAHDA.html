@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAHDA COMMUNITY SCHOOL - Excellence in Early Education</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #f39c12;
+            --accent-color: #e74c3c;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --text-color: #555;
+            --white: #fff;
+            --uniform-blue: #add8e6;
+            --uniform-dark: #000080;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader.fade-out {
+            opacity: 0;
+        }
+        
+        .loader {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+        
+        .loader-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid transparent;
+            border-top-color: var(--uniform-blue);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+        
+        .loader-circle:nth-child(2) {
+            border-top-color: var(--uniform-dark);
+            animation-delay: 0.3s;
+        }
+        
+        .loader-circle:nth-child(3) {
+            border-top-color: var(--secondary-color);
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .preloader-text {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--uniform-blue);
+            color: var(--uniform-dark);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            border: 2px solid var(--uniform-dark);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--uniform-dark);
+            color: var(--uniform-blue);
+            transform: translateY(-5px);
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 10px;
+        }
+        
+        .logo-text h1 {
+            font-size: 24px;
+            color: var(--uniform-dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            color: var(--uniform-blue);
+            font-weight: 600;
+        }
+        
+        .logo-text p {
+            font-size: 12px;
+            color: var(--text-color);
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--uniform-dark);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--uniform-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--uniform-dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            color: var(--white);
+            margin-top: 90px;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--uniform-blue);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--uniform-dark);
+            color: var(--white);
+            border: 2px solid var(--uniform-dark);
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--uniform-dark);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--uniform-dark);
+        }
+        
+        /* About Section */
+        .section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--uniform-dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--uniform-blue);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInLeft 1s ease;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text {
+            flex: 1;
+            animation: fadeInRight 1s ease;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            color: var(--uniform-dark);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .about-features {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--uniform-dark);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h4 {
+            font-size: 18px;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        /* Academics Section */
+        .academics {
+            background: var(--light-color);
+        }
+        
+        .academics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .academic-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .academic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .academic-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .academic-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .academic-card:hover .academic-img img {
+            transform: scale(1.1);
+        }
+        
+        .academic-content {
+            padding: 25px;
+        }
+        
+        .academic-content h3 {
+            font-size: 22px;
+            color: var(--uniform-dark);
+            margin-bottom: 15px;
+        }
+        
+        .academic-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .academic-content a {
+            color: var(--uniform-blue);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        
+        .academic-content a:hover {
+            color: var(--uniform-dark);
+        }
+        
+        .academic-content a i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .academic-content a:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Uniform Section */
+        .uniform {
+            background-color: var(--light-color);
+        }
+        
+        .uniform-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .uniform-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .uniform-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .uniform-details {
+            flex: 1;
+        }
+        
+        .uniform-details h3 {
+            font-size: 28px;
+            color: var(--uniform-dark);
+            margin-bottom: 20px;
+        }
+        
+        .uniform-details p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .uniform-items {
+            margin-top: 30px;
+        }
+        
+        .uniform-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .uniform-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--uniform-blue);
+            color: var(--uniform-dark);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Facilities Section */
+        .facilities-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .facility-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .facility-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .facility-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: var(--uniform-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .facility-card:hover .facility-icon {
+            background: var(--uniform-dark);
+            color: var(--uniform-blue);
+            transform: rotate(360deg);
+        }
+        
+        .facility-card h3 {
+            font-size: 20px;
+            color: var(--uniform-dark);
+            margin-bottom: 15px;
+        }
+        
+        .facility-card p {
+            line-height: 1.6;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background: var(--light-color);
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay i {
+            color: var(--white);
+            font-size: 30px;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 24px;
+            color: var(--uniform-dark);
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--uniform-dark);
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h4 {
+            font-size: 18px;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        .contact-text p, .contact-text a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-text a:hover {
+            color: var(--uniform-dark);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--uniform-dark);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--uniform-dark);
+            color: var(--uniform-blue);
+            transform: translateY(-5px);
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--uniform-dark);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background: var(--uniform-dark);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: var(--uniform-blue);
+            color: var(--uniform-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--uniform-dark);
+            color: var(--white);
+            padding: 70px 5% 30px;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--uniform-blue);
+        }
+        
+        .footer-col p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--uniform-blue);
+            transform: translateX(5px);
+        }
+        
+        .footer-links a i {
+            margin-right: 5px;
+        }
+        
+        .footer-newsletter p {
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .newsletter-form button {
+            background: var(--uniform-blue);
+            color: var(--uniform-dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--secondary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content, .uniform-container {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background: var(--white);
+                transition: all 0.3s ease;
+                padding: 30px 5%;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .section {
+                padding: 70px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+        </div>
+        <div class="preloader-text">WAHDA COMMUNITY SCHOOL</div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/60x60" alt="Wahda Community School Logo">
+                <div class="logo-text">
+                    <h1>WAHDA <span>COMMUNITY SCHOOL</span></h1>
+                    <p>Ngombe Compound, Lusaka</p>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#academics">Academics</a></li>
+                    <li><a href="#uniform">Uniform</a></li>
+                    <li><a href="#facilities">Facilities</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Nurturing Young Minds <span>in Ng'ombe</span></h1>
+            <p>At Wahda Community School, we provide a caring environment that fosters early learning and development for children from Pre-Grade to Grade 7 in Ng'ombe Compound, Lusaka.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-primary">Enquire Now</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>About Our School</h2>
+            <p>Discover what makes Wahda Community School a special place for your child's early education journey in Ng'ombe Compound.</p>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="School Building">
+            </div>
+            
+            <div class="about-text">
+                <h3>Welcome to Wahda Community School</h3>
+                <p>Established to serve the Ng'ombe community, Wahda Community School has been providing quality foundational education since our founding. Our mission is to create a nurturing environment where young learners develop a love for learning, build strong character, and acquire essential skills for their educational journey.</p>
+                <p>With dedicated teachers who understand early childhood development, we create an environment where every child can thrive and discover their potential.</p>
+                
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Child-Centered Learning</h4>
+                            <p>Our approach focuses on each child's individual needs and learning style.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Foundational Curriculum</h4>
+                            <p>We build strong literacy and numeracy skills through engaging activities.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Community Focus</h4>
+                            <p>Deeply rooted in Ng'ombe Compound, serving local families.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Happy Environment</h4>
+                            <p>We create a joyful space where children love to learn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Academics Section -->
+    <section class="section academics" id="academics">
+        <div class="section-title">
+            <h2>Our Academics</h2>
+            <p>We offer comprehensive programs designed specifically for young learners from Pre-Grade through Grade 7.</p>
+        </div>
+        
+        <div class="academics-container">
+            <div class="academic-card">
+                <div class="academic-img">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Early Years">
+                </div>
+                <div class="academic-content">
+                    <h3>Pre-Grade Program</h3>
+                    <p>Our play-based learning approach for ages 4-6 focuses on developing foundational skills through fun, interactive activities that prepare children for formal schooling.</p>
+                    <a href="#contact">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="academic-card">
+                <div class="academic-img">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Lower Primary">
+                </div>
+                <div class="academic-content">
+                    <h3>Lower Primary (G1-G4)</h3>
+                    <p>Our Grades 1-4 program builds strong literacy and numeracy skills while incorporating creative arts, physical education, and social development activities.</p>
+                    <a href="#contact">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="academic-card">
+                <div class="academic-img">
+                    <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Upper Primary">
+                </div>
+                <div class="academic-content">
+                    <h3>Upper Primary (G5-G7)</h3>
+                    <p>Our upper primary program prepares students for secondary education with a focus on core subjects while developing critical thinking and problem-solving skills.</p>
+                    <a href="#contact">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Uniform Section -->
+    <section class="section uniform" id="uniform">
+        <div class="section-title">
+            <h2>School Uniform</h2>
+            <p>Our distinctive uniform creates a sense of belonging and pride in our school community.</p>
+        </div>
+        
+        <div class="uniform-container">
+            <div class="uniform-image">
+                <img src="https://images.unsplash.com/photo-1591123720164-de1348028a82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="School Uniform">
+            </div>
+            
+            <div class="uniform-details">
+                <h3>Our Uniform Policy</h3>
+                <p>All students at Wahda Community School are required to wear our official uniform, which consists of a light blue shirt and navy blue pants/skirt. The uniform must be worn clean and neat at all times.</p>
+                <p>Wearing the uniform helps students develop pride in their school and creates an atmosphere of equality and focus on learning.</p>
+                
+                <div class="uniform-items">
+                    <div class="uniform-item">
+                        <i class="fas fa-tshirt"></i>
+                        <div>
+                            <h4>Shirt</h4>
+                            <p>Light blue short/long sleeve shirt with school logo</p>
+                        </div>
+                    </div>
+                    
+                    <div class="uniform-item">
+                        <i class="fas fa-socks"></i>
+                        <div>
+                            <h4>Bottoms</h4>
+                            <p>Navy blue trousers for boys, navy blue skirts/pinafores for girls</p>
+                        </div>
+                    </div>
+                    
+                    <div class="uniform-item">
+                        <i class="fas fa-shoe-prints"></i>
+                        <div>
+                            <h4>Shoes</h4>
+                            <p>Black closed shoes with navy blue socks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="uniform-item">
+                        <i class="fas fa-vest"></i>
+                        <div>
+                            <h4>Sweater</h4>
+                            <p>Navy blue sweater with school logo (optional in cold weather)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Facilities Section -->
+    <section class="section" id="facilities">
+        <div class="section-title">
+            <h2>Our Facilities</h2>
+            <p>We provide child-friendly facilities designed to support early learning and development.</p>
+        </div>
+        
+        <div class="facilities-container">
+            <div class="facility-card">
+                <div class="facility-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Reading Corner</h3>
+                <p>Our colorful reading area is filled with age-appropriate books to foster early literacy and a love for reading.</p>
+            </div>
+            
+            <div class="facility-card">
+                <div class="facility-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3>Creative Arts</h3>
+                <p>Dedicated spaces for art, music, and drama allow children to express themselves creatively.</p>
+            </div>
+            
+            <div class="facility-card">
+                <div class="facility-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Play Area</h3>
+                <p>Safe outdoor and indoor play spaces with educational toys and equipment for physical development.</p>
+            </div>
+            
+            <div class="facility-card">
+                <div class="facility-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Dining Area</h3>
+                <p>Clean, supervised spaces for children to enjoy their meals and learn healthy eating habits.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+  <section class="section gallery" id="gallery">
+        <div class="section-title">
+            <h2>School Life</h2>
+            <p>Explore moments from our daily activities, special events, and the vibrant life at Wahda Community School.</p>
+        </div>
+        
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Classroom">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Students Learning">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Art Class">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sports Day">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="School Event">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Group Activity">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <p>Visit us in Ng'ombe Compound or reach out for admissions, inquiries, or to schedule a school tour.</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p>Our friendly staff are ready to assist you with any questions about our programs, admissions process, or school facilities.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Address</h4>
+                            <p>Plot 123, Ng'ombe Compound, Lusaka, Zambia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p><a href="tel:+260123456789">+260 123 456 789</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@wahdaschool.edu.zm">info@wahdaschool.edu.zm</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Office Hours</h4>
+                            <p>Monday - Friday: 7:30 AM - 4:30 PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Parent's Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="child">Child's Age/Grade</label>
+                        <input type="text" id="child" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>Wahda Community School is committed to providing quality foundational education to children in Ng'ombe Compound, preparing them for academic success and responsible citizenship.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#academics"><i class="fas fa-chevron-right"></i> Academics</a></li>
+                    <li><a href="#uniform"><i class="fas fa-chevron-right"></i> Uniform</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Programs</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Pre-Grade</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Lower Primary</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Upper Primary</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> School Calendar</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Extracurricular</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter to receive updates on school news, events, and important announcements.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Wahda Community School, Ng'ombe Compound. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--uniform-blue);"></i> for Quality Education</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            setTimeout(function() {
+                preloader.classList.add('fade-out');
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-times');
+            this.querySelector('i').classList.toggle('fa-bars');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 90,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.about-img, .about-text, .academic-card, .facility-card, .gallery-item, .contact-info, .contact-form, .uniform-image, .uniform-details');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.about-img, .about-text, .academic-card, .facility-card, .gallery-item, .contact-info, .contact-form, .uniform-image, .uniform-details').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transition = 'all 0.5s ease';
+        });
+        
+        document.querySelector('.about-img').style.transform = 'translateX(-30px)';
+        document.querySelector('.about-text').style.transform = 'translateX(30px)';
+        document.querySelectorAll('.academic-card, .facility-card, .gallery-item').forEach((card, index) => {
+            card.style.transform = 'translateY(30px)';
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+        document.querySelector('.contact-info').style.transform = 'translateX(-30px)';
+        document.querySelector('.contact-form').style.transform = 'translateX(30px)';
+        document.querySelector('.uniform-image').style.transform = 'translateX(-30px)';
+        document.querySelector('.uniform-details').style.transform = 'translateX(30px)';
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
