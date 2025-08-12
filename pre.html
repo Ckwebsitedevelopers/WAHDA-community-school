@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Grade Program - Wahda Community School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2e8b57; /* Green */
+            --secondary-color: #f39c12; /* Orange */
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --text-color: #555;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles (Match your main site) */
+        header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text h1 {
+            font-size: 22px;
+            color: var(--white);
+        }
+        
+        .back-btn {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn i {
+            margin-right: 5px;
+        }
+        
+        /* Hero Section */
+        .program-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .program-hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        /* Program Content */
+        .program-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 5%;
+        }
+        
+        .program-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .program-intro h2 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .program-intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+        
+        /* Program Features */
+        .program-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* Daily Routine */
+        .daily-routine {
+            background: var(--light-color);
+            padding: 50px 5%;
+            margin: 50px 0;
+        }
+        
+        .routine-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .routine-container h2 {
+            text-align: center;
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        
+        .routine-item {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .routine-time {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 10px 15px;
+            border-radius: 5px;
+            min-width: 120px;
+            text-align: center;
+            margin-right: 20px;
+            font-weight: 500;
+        }
+        
+        /* CTA Section */
+        .program-cta {
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .program-cta h2 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 5%;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .program-hero h1 {
+                font-size: 32px;
+            }
+            
+            .routine-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .routine-time {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/50x50" alt="Wahda Community School Logo">
+                <div class="logo-text">
+                    <h1>WAHDA COMMUNITY SCHOOL</h1>
+                </div>
+            </div>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="program-hero">
+        <div>
+            <h1>Pre-Grade Program</h1>
+            <p>Ages 4-6 | Play-Based Learning | Ng'ombe Compound</p>
+        </div>
+    </section>
+    
+    <!-- Program Content -->
+    <div class="program-container">
+        <section class="program-intro">
+            <h2>Nurturing Young Minds</h2>
+            <p>Our play-based learning approach for ages 4-6 focuses on developing foundational skills through fun, interactive activities that prepare children for formal schooling.</p>
+        </section>
+        
+        <section class="program-features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <h3>Holistic Development</h3>
+                <p>We focus on cognitive, physical, social, and emotional growth through carefully designed activities that make learning natural and enjoyable.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Play-Based Learning</h3>
+                <p>Children learn best through play. Our curriculum uses structured play to teach literacy, numeracy, and problem-solving skills.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3>Social Skills</h3>
+                <p>We create opportunities for children to develop communication, sharing, and cooperation skills in a supportive environment.</p>
+            </div>
+        </section>
+        
+        <section class="daily-routine">
+            <div class="routine-container">
+                <h2>Our Daily Routine</h2>
+                
+                <div class="routine-item">
+                    <div class="routine-time">7:30 - 8:00</div>
+                    <div class="routine-desc">Arrival & Free Play</div>
+                </div>
+                
+                <div class="routine-item">
+                    <div class="routine-time">8:00 - 8:30</div>
+                    <div class="routine-desc">Morning Circle (Songs, Stories, Calendar)</div>
+                </div>
+                
+                <div class="routine-item">
+                    <div class="routine-time">8:30 - 9:30</div>
+                    <div class="routine-desc">Learning Centers (Literacy, Math, Science)</div>
+                </div>
+                
+                <div class="routine-item">
+                    <div class="routine-time">9:30 - 10:00</div>
+                    <div class="routine-desc">Snack Time & Social Development</div>
+                </div>
+                
+                <div class="routine-item">
+                    <div class="routine-time">10:00 - 11:00</div>
+                    <div class="routine-desc">Outdoor Play & Physical Development</div>
+                </div>
+                
+                <div class="routine-item">
+                    <div class="routine-time">11:00 - 11:30</div>
+                    <div class="routine-desc">Creative Arts (Drawing, Painting, Crafts)</div>
+                </div>
+                
+                <div class="routine-item">
+                    <div class="routine-time">11:30 - 12:00</div>
+                    <div class="routine-desc">Story Time & Preparation for Dismissal</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="program-cta">
+            <h2>Ready to Join Our Pre-Grade Program?</h2>
+            <p>Give your child the best start to their educational journey at Wahda Community School in Ng'ombe Compound.</p>
+            <a href="contact.html" class="cta-btn">Enquire Now</a>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>Wahda Community School &copy; 2023</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="#">Admissions</a>
+        </div>
+        <p>Ngombe Compound, Lusaka, Zambia</p>
+    </footer>
+</body>
+  </html>
